@@ -21,7 +21,7 @@
 					<label for="title">
 						Título
 					</label>
-					<input type="title" name="title" id="title" />
+					<input type="title" name="title" id="title"> </input>
 				</div>
 				<div>
 					<label for="description">Descrição</label>
@@ -29,7 +29,7 @@
 				</div>
 				<div>
 					<label for="pages">Número de páginas</label>
-					<input type="text" name="pages" id="pages" />
+					<input type="text" name="pages" id="pages"></input>
 				</div>
 				<div>
 					<input type="submit" value="Enviar">
