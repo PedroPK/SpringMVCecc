@@ -1,4 +1,4 @@
-package br.spring.mvc.model.config;
+package br.spring.mvc.configs;
 
 import java.util.Properties;
 
