@@ -1,4 +1,4 @@
-package br.spring.mvc.controllers;
+		package br.spring.mvc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +18,12 @@ public class ProductController {
 	@RequestMapping("/products/form")
 	public String form() {
 		return "products/form";
+	}
+	
+	@RequestMapping("/")
+	public String index() {
+		System.out.println("Página Inicial");
+		return "index.jsp";
 	}
 	
 	public String save(Product pProduto) {
