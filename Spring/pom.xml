@@ -132,7 +132,7 @@
 			<artifactId>spring-orm</artifactId>
 			<version>5.1.4.RELEASE</version>
 		</dependency>
-
+		
 		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>

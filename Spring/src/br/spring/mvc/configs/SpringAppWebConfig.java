@@ -12,9 +12,10 @@ import br.spring.mvc.model.daos.ProductDAO;
 
 @EnableWebMvc
 @ComponentScan(
-	basePackages= (
-		"br.spring.mvc.controllers"
-	)
+	basePackages= {
+		"br.spring.mvc.controllers",
+		"br.spring.mvc.model.daos"
+	}
 )
 public class SpringAppWebConfig implements WebMvcConfigurer {
 	
