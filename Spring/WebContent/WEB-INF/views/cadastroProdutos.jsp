@@ -17,7 +17,7 @@
 			<title>Cadastro de Produtos em Spring</title>
 		</head>
 		<body>
-			<form method="post" action="/Spring/produtos">
+			<form method="post" action="/Spring/products">
 				<div>
 					<label for="title">
 						Título
@@ -26,14 +26,14 @@
 				</div>
 				<div>
 					<label for="description">Descrição</label>
-					<textarea rows="10" cols="20" name="description" id="description"></textarea>
+					<input rows="10" cols="20" name="description" id="description"></input>
 				</div>
 				<div>
 					<label for="pages">Número de páginas</label>
 					<input type="text" name="pages" id="pages"></input>
 				</div>
 				<div>
-					<input type="submit" value="Enviar">
+					<input type="submit" value="Enviar"></input>
 				</div>
 			</form>
 			<f:view>
