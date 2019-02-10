@@ -15,9 +15,14 @@ public class ProductController {
 	@Autowired
 	private ProductDAO aDAO;
 	
-	@RequestMapping("/products")
-	public String submit() {
-		System.out.println("ProductController - /products");
+	@RequestMapping("/registerProduct")
+	public String submit(Product pProduto) {
+		if ( pProduto != null ) {
+			System.out.println(pProduto.toString());
+		} else {
+			System.out.println("Produto Nulo!");
+		}
+		System.out.println("ProductController - /registerProduct");
 		return "products/form";
 	}
 	

@@ -13,57 +13,52 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Integer		id;
 	
-	private String title;
+	private String		title;
 	
-	private BigDecimal value;
+	private BigDecimal	value;
 	
-	private int pages;
+	private int			pages;
 	
 	@Lob
 	private String description;
-
+	
 	public Integer getId() {
 		return id;
 	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer pId) {
+		this.id = pId;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
-
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTitle(String pTitle) {
+		this.title = pTitle;
 	}
-
+	
 	public BigDecimal getValue() {
 		return value;
 	}
-
-	public void setValue(BigDecimal value) {
-		this.value = value;
+	public void setValue(BigDecimal pValue) {
+		this.value = pValue;
 	}
-
+	
 	public int getPages() {
 		return pages;
 	}
-
-	public void setPages(int pages) {
-		this.pages = pages;
+	public void setPages(int pPages) {
+		this.pages = pPages;
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String pDescription) {
+		this.description = pDescription;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -74,16 +69,16 @@ public class Product {
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
-
+	
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(Object pObj) {
+		if (this == pObj)
 			return true;
-		if (obj == null)
+		if (pObj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (getClass() != pObj.getClass())
 			return false;
-		Product other = (Product) obj;
+		Product other = (Product) pObj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -103,12 +98,10 @@ public class Product {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", title=" + title + ", pages=" + pages + ", description=" + description + "]";
 	}
-	
-	
 	
 }

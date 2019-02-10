@@ -16,12 +16,10 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<title>Cadastro de Produtos em Spring</title>
 		</head>
-		<body>
-			<form method="post" action="/Spring/products">
+		<body bgcolor="#474747">
+			<form method="post" action="/Spring/registerProduct">
 				<div>
-					<label for="title">
-						Título
-					</label>
+					<label for="title">Título</label>
 					<input type="title" name="title" id="title"> </input>
 				</div>
 				<div>
