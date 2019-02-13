@@ -1,5 +1,6 @@
 package br.spring.mvc.model.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -9,7 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-public class Product {
+public class Product implements Serializable {
+	
+	/**
+	 * - Serial Version UID 
+	 */
+	private static final long serialVersionUID = -889501267054436593L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

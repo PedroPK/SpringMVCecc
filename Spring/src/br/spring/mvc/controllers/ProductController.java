@@ -17,19 +17,28 @@ public class ProductController {
 	
 	@RequestMapping("/registerProduct")
 	public String submit(Product pProduto) {
+		System.out.println("ProductController - /registerProduct");
 		if ( pProduto != null ) {
 			System.out.println(pProduto.toString());
+			
+			this.aDAO.save(pProduto);
 		} else {
 			System.out.println("Produto Nulo!");
 		}
-		System.out.println("ProductController - /registerProduct");
+		
 		return "products/form";
 	}
 	
 	@RequestMapping("/Spring/products")
 	public String submit2() {
 		System.out.println("ProductController - /Spring/products");
-		return "products/form";
+		return "cadastroProdutos";
+	}
+	
+	@RequestMapping("/products")
+	public String showForms() {
+		System.out.println("ProductController - /Spring/products");
+		return "cadastroProdutos";
 	}
 	
 	@RequestMapping("/products/form")

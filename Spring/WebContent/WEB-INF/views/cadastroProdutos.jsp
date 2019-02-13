@@ -24,7 +24,11 @@
 				</div>
 				<div>
 					<label for="description">Descrição</label>
-					<input rows="10" cols="20" name="description" id="description"></input>
+					<input type="text" name="description" id="description"></input>
+				</div>
+				<div>
+					<label for="description">Valor</label>
+					<input type="text" name="value" id="value"></input>
 				</div>
 				<div>
 					<label for="pages">Número de páginas</label>
