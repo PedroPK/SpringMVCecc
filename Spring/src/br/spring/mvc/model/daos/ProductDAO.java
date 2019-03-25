@@ -37,7 +37,7 @@ public class ProductDAO {
 		return resultSet;
 	}
 	
-	public List<Product> deleteAll() {
+	public void deleteAll() {
 		List<Product> resultSet = new ArrayList<Product>();
 		
 		String sql = "Select p From Product p";
@@ -50,8 +50,6 @@ public class ProductDAO {
 		for (Product product : resultSet) {
 			this.aEntityManager.remove(product);
 		}
-		
-		return resultSet;
 	}
 	
 	public Product select(Product pProduct) {
