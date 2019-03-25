@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,26 @@ public class ProductDAOTest {
 	}
 	
 	@Test
+	public void testDelete() {
+		// Arrange
+		Product produto = instancializeProductHitchhikers();
+		this.aDAO.save(produto);
+		Product resultProduct = this.aDAO.select(produto);
+		assertNotNull(	resultProduct);
+		assertNotSame(	produto, 				resultProduct);
+		assertEquals(	produto.hashCode(),		resultProduct.hashCode());
+		assertTrue(		produto.equals(			resultProduct));
+		
+		// Act
+		this.aDAO.delete(resultProduct);
+		List<Product> resultSet = this.aDAO.selectAll();
+		
+		// Assert
+		assertNotNull(	resultSet);
+		assertTrue(		resultSet.isEmpty());
+	}
+	
+	@Test
 	public void testDeleteAll() {
 		// Arrange
 		Product produto = instancializeProductHitchhikers();
@@ -71,6 +92,11 @@ public class ProductDAOTest {
 		// Assert
 		assertNotNull(resultSet);
 		assertTrue(resultSet.isEmpty());
+	}
+	
+	@Before
+	public void clearTable() {
+		this.aDAO.deleteAll();
 	}
 	
 	private Product instancializeProductHitchhikers() {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -64,7 +63,14 @@ public class ProductDAO {
 	}
 	
 	public void delete(Product pProduct) {
-		this.aEntityManager
+		Product result = 
+			this.aEntityManager.find(
+				Product.class, 
+				pProduct.getPrimaryKey());
+		
+		if ( result != null ) {
+			this.aEntityManager.remove(result);
+		}
 	}
 	
 }
