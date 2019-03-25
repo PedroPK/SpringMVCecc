@@ -25,13 +25,28 @@ public class ProductDAOTest {
 	}
 	
 	@Test
-	public void testSelectAll() {
+	public void testSelectAll_EmptyResultSet() {
 		// Act
 		List<Product> resultSet = this.aDAO.selectAll();
 		
 		// Assert
 		assertNotNull(resultSet);
 		assertTrue(resultSet.isEmpty());
+	}
+	
+	@Test
+	public void testInsertOneProduct() {
+		// Arrange
+		Product produto = new Product();
+		produto.setTitle("The Hitchhiker's Guide to the Galaxy");
+		produto.setDescription("The answer to life, the universe and everything");
+		produto.setPages(42);
+		
+		// Act
+		this.aDAO.save(produto);
+		
+		// Assert
+		// If it do not throw an Exception, its fine for now
 	}
 	
 }
