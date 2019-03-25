@@ -19,7 +19,7 @@ public class ProductDAO {
 	
 	@PersistenceContext
 	private EntityManager aEntityManager;
-
+	
 	public void save(Product pProduto) {
 		this.aEntityManager.persist(pProduto);
 	}
@@ -37,10 +37,36 @@ public class ProductDAO {
 		return resultSet;
 	}
 	
-	private EntityManager getEntityManager() {
-		if (this.aEntityManager == null) {
-			Persistence.createEntityManagerFactory(persistenceUnitName)
+	public List<Product> deleteAll() {
+		List<Product> resultSet = new ArrayList<Product>();
+		
+		String sql = "Select p From Product p";
+		
+		TypedQuery<Product> typedQuery = 
+			this.aEntityManager.createQuery(sql, Product.class);
+		
+		resultSet = typedQuery.getResultList();
+		
+		for (Product product : resultSet) {
+			this.aEntityManager.remove(product);
 		}
+		
+		return resultSet;
 	}
-
+	
+	public Product select(Product pProduct) {
+		Product result = 
+			this.aEntityManager.find(Product.class, pProduct.getPrimaryKey());
+		
+		if ( result != null ) {
+			this.aEntityManager.remove(result);
+		}
+		
+		return result;
+	}
+	
+	public void delete(Product pProduct) {
+		this.aEntityManager
+	}
+	
 }
