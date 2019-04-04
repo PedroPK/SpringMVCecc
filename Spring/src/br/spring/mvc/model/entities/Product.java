@@ -1,16 +1,19 @@
 package br.spring.mvc.model.entities;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import br.spring.mvc.model.entities.embeddables.Price;
+import static br.spring.mvc.utils.LibraryUtilities.*;
+
 @Entity
-public class Product implements Serializable {
+public class Product implements EntityInterface {
 	
 	/**
 	 * - Serial Version UID 
@@ -19,13 +22,14 @@ public class Product implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer		id;
+	private Integer			id;
 	
-	private String		title;
+	private String			title;
 	
-	private BigDecimal	value;
+	@ElementCollection
+	private List<Price>		value;
 	
-	private int			pages;
+	private int				pages;
 	
 	@Lob
 	private String description;
@@ -44,10 +48,10 @@ public class Product implements Serializable {
 		this.title = pTitle;
 	}
 	
-	public BigDecimal getValue() {
+	public List<Price> getValue() {
 		return value;
 	}
-	public void setValue(BigDecimal pValue) {
+	public void setValue(List<Price> pValue) {
 		this.value = pValue;
 	}
 	
@@ -108,6 +112,24 @@ public class Product implements Serializable {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", title=" + title + ", pages=" + pages + ", description=" + description + "]";
+	}
+	@Override
+	public Object getPrimaryKey() {
+		return getId();
+	}
+	
+	public boolean hasAnyAttributeValid() {
+		boolean answer = false;
+		
+		if (
+				isStringValid(this.getTitle())			||
+				isStringValid(this.getDescription())	||
+				this.getPages()							> 0
+		) {
+			answer = true;
+		}
+		
+		return answer;
 	}
 	
 }

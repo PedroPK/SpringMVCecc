@@ -50,14 +50,13 @@ public class ProductController {
 			Product insertedProduct = this.aDAO.select(pProduto);
 			
 			// Mount a List of Products, that may be listed at JSP any moment in the future
-			List<Product> listInsertedProducts = new ArrayList<Product>();
-			listInsertedProducts.add(insertedProduct);
+			List<Product> listInsertedProducts = this.aDAO.selectAll();
 			
 			// This method adds an object that has to be available in JSP
-			mv.addObject("product",					insertedProduct);
-			mv.addObject("listInsertedProducts",	listInsertedProducts);
+			mv.addObject("product",			insertedProduct);
+			mv.addObject("listProducts",	listInsertedProducts);
 			
-			mv = new ModelAndView("productList");
+			//mv = new ModelAndView("cadastroProdutos");
 		} else {
 			// Logging messages
 			logger.debug("Produto Nulo!");

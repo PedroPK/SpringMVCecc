@@ -1,4 +1,6 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"		pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 	
@@ -10,40 +12,86 @@
 	<body bgcolor="#474747">
 		<form method="post" action="/Spring/registerProduct">
 			<div>
-				<label for="title">Título</label>
-				<input type="title" name="title" id="title"> </input>
+				<label for="title">TÃ­tulo</label>
+				<input type="text" name="title" id="title"></input>
 			</div>
 			<div>
-				<label for="description">Descrição</label>
+				<label for="description">DescriÃ§Ã£o</label>
 				<input type="text" name="description" id="description"></input>
 			</div>
-			
-			<c:forEach items="${types}" var="bookType" varStatus="status">
-				<div>
-					<label for="price_${bookType}">${bookType}</label>
-					
-					<input	type="text" 
-							name="prices[${status.index}].value"
-							id="price_${bookType}">						</input>
-					
-					<input	type="hidden"
-							name="prices[${status.index}].bookType"
-							value="${bookType}">						</input>
-				</div>
-			</c:forEach>
-			
 			<!-- <div>
 				<label for="description">Valor</label>
 				<input type="text" name="value" id="value"></input>
 			</div> -->
 			<div>
-				<label for="pages">Número de páginas</label>
+				<label for="pages">NÃºmero de pÃ¡ginas</label>
 				<input type="text" name="pages" id="pages"></input>
 			</div>
 			<div>
 				<input type="submit" value="Enviar"></input>
 			</div>
+			
+			<c:forEach items="${listInsertedProducts}" var="book" varStatus="status">
+				<div>
+					<label for="title">Books</label>
+					
+					<input	type="text">${book.title} - ${book.description} - ${book.pages}</input>
+				</div>
+			</c:forEach>
 		</form>
+		<br>
+		<br>
+		<br>
+		<table>
+			<tr>
+				<td>
+					Book Title
+				</td>
+				<td>
+					Description
+				</td>
+			</tr>
+			<c:if test="${not empty listProducts}">
+				<c:forEach items="${listProducts}" var="product">
+					<tr>
+						<td>
+							${product.title}
+						</td>
+						<td>
+							${product.description}
+						</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty listProducts}">
+				<tr>
+					<td>
+						There is no Books to be listed
+					</td>
+					<td> - </td>
+				</tr>
+			</c:if>
+			<!-- 
+				<c:if test="${product == null || !product.hasAnyAttributeValid()}">
+					<tr>
+						<td>
+							The Product is Null or has no Valid Attributes
+						</td>
+						<td> - </td>
+					</tr>
+				</c:if>
+				<c:if test="${product != null && product.hasAnyAttributeValid()}">
+					<tr>
+						<td>
+							The Product is Not Null
+							<br>
+							${product.title}
+						</td>
+						<td>${product.description}</td>
+					</tr>
+				</c:if>
+			-->
+		</table>
 		<f:view>
 		</f:view>
 	</body>
