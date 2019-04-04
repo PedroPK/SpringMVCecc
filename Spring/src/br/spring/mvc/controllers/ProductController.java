@@ -1,6 +1,5 @@
 		package br.spring.mvc.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.spring.mvc.model.daos.ProductDAO;
 import br.spring.mvc.model.entities.Product;
@@ -65,22 +65,40 @@ public class ProductController {
 		return mv;
 	}
 	
-	@RequestMapping("/Spring/products")
-	public String submit2() {
-		logger.debug("ProductController - /Spring/products");
-		return "cadastroProdutos";
-	}
-	
-	@RequestMapping("/products")
-	public String showForms() {
-		logger.debug("ProductController - /Spring/products");
-		return "cadastroProdutos";
-	}
-	
-	@RequestMapping("/products/form")
-	public String form() {
-		logger.debug("ProductController - /products/form");
-		return "products/form";
+	@RequestMapping("/registerProductRedirection")
+	public String submitRedirection(
+		Product				pProduto,
+		RedirectAttributes	pRedirectAttributes
+	) {
+		// Logging messages
+		logger.debug("ProductController - /registerProductRedirection");
+		
+		// This constructor defines to where the Request should be redirected
+		if (
+				pProduto	!= null		&&
+				pProduto.hasAnyAttributeValid()
+		) {
+			// Logging messages
+			logger.debug(pProduto.toString());
+			
+			// Insert the Product
+			this.aDAO.save(pProduto);
+			
+			// Select the inserted Product
+			Product insertedProduct = this.aDAO.select(pProduto);
+			
+			// Mount a List of Products, that may be listed at JSP any moment in the future
+			List<Product> listInsertedProducts = this.aDAO.selectAll();
+			
+			// This method adds an object that has to be available in JSP
+			pRedirectAttributes.addFlashAttribute("product",		insertedProduct);
+			pRedirectAttributes.addFlashAttribute("listProducts",	listInsertedProducts);
+		} else {
+			// Logging messages
+			logger.debug("Produto Nulo!");
+		}
+		
+		return "redirect:cadastroProdutos";
 	}
 	
 	@RequestMapping("/")

@@ -10,7 +10,7 @@
 		<title>Cadastro de Produtos em Spring</title>
 	</head>
 	<body bgcolor="#474747">
-		<form method="post" action="/Spring/registerProduct">
+		<form method="post" action="/Spring/registerProductRedirection">
 			<div>
 				<label for="title">Título</label>
 				<input type="text" name="title" id="title"></input>
