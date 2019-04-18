@@ -1,12 +1,16 @@
-		package br.spring.mvc.controllers;
+package br.spring.mvc.controllers;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,6 +33,24 @@ public class ProductController {
 		this.logger.info("ProductController instancialized");
 	}
 	
+	/**
+	 * This method binds the Validator to the Entity handled by this Controller
+	 * 
+	 * @param pWebDataBinder
+	 */
+	@InitBinder
+	public void bindValidator(WebDataBinder pWebDataBinder) {
+		pWebDataBinder.setValidator(new Product());
+	}
+	
+	/**
+	 * This method does the Binding of an Object from the JSP Page, and does a Persistence operation to save a
+	 * new registry in the Database, but does not do a Redirection
+	 * 
+	 * @param pProduto
+	 * 
+	 * @return	ModelAndView	This object will be responsible to send attributes to a JSP Page.
+	 */
 	@RequestMapping("/registerProduct")
 	public ModelAndView submit(Product pProduto) {
 		// Logging messages
@@ -65,8 +87,18 @@ public class ProductController {
 		return mv;
 	}
 	
+	/**
+	 * This method does the Binding of an Object from the JSP Page, and does a Persistence operation to save a
+	 * new registry in the Database, and does a Redirection in the and of its execution
+	 * 
+	 * @param pProduto
+	 * @param pRedirectAttributes
+	 * 
+	 * @return		String		This string contains the JSP page name that will receive the redirection
+	 */
 	@RequestMapping("/registerProductRedirection")
 	public String submitRedirection(
+		@Valid
 		Product				pProduto,
 		RedirectAttributes	pRedirectAttributes
 	) {
@@ -101,6 +133,10 @@ public class ProductController {
 		return "redirect:cadastroProdutos";
 	}
 	
+	/**
+	 * This method receives an empty URL and returns the Index JSP Page
+	 * @return
+	 */
 	@RequestMapping("/")
 	public String index() {
 		logger.debug("Página Inicial");

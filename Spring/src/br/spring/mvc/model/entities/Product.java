@@ -9,12 +9,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
 import br.spring.mvc.model.entities.embeddables.Price;
 import static br.spring.mvc.utils.LibraryUtilities.*;
 
 @Entity
-public class Product implements EntityInterface {
+public class Product implements EntityInterface, Validator {
 	
+	private static final String PAGES_ATTRIBUTE_NAME = "pages";
+	private static final String DESCRIPTION_ATTRIBUTE_NAME = "description";
+	private static final String TITLE_ATTRIBUTE_NAME = "title";
+
+	private static final String ERROR_CODE_REQUIRED_ATTRIBUTE = "requiredAttribute";
+
 	/**
 	 * - Serial Version UID 
 	 */
@@ -111,7 +121,10 @@ public class Product implements EntityInterface {
 	
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", title=" + title + ", pages=" + pages + ", description=" + description + "]";
+		return "Product [id=" + id + 
+					", " + TITLE_ATTRIBUTE_NAME			+ "=" + title + 
+					", " + PAGES_ATTRIBUTE_NAME			+ "=" + pages + 
+					", " + DESCRIPTION_ATTRIBUTE_NAME	+ "=" + description + "]";
 	}
 	@Override
 	public Object getPrimaryKey() {
@@ -130,6 +143,23 @@ public class Product implements EntityInterface {
 		}
 		
 		return answer;
+	}
+	@Override
+	public boolean supports(Class<?> clazz) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void validate(Object pTarget, Errors pErrors) {
+		// TODO Auto-generated method stub
+		ValidationUtils.rejectIfEmptyOrWhitespace(pErrors, TITLE_ATTRIBUTE_NAME, ERROR_CODE_REQUIRED_ATTRIBUTE);
+		ValidationUtils.rejectIfEmptyOrWhitespace(pErrors, DESCRIPTION_ATTRIBUTE_NAME, ERROR_CODE_REQUIRED_ATTRIBUTE);
+		
+		Product product = (Product) pTarget;
+		
+		if ( product.getPages() <= 0 ) {
+			pErrors.rejectValue(PAGES_ATTRIBUTE_NAME, ERROR_CODE_REQUIRED_ATTRIBUTE);
+		}
 	}
 	
 }
